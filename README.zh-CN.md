@@ -16,7 +16,7 @@
 
 只在 **Linux 上的 osu!lazer 2026.1005.0-lazer**（写作时的正式版）测试过。DLL 是对着这个版本编译的，其他版本可能无法加载；无法加载时 lazer 会弹出 "An issue with ruleset" 通知，详情在 `logs/runtime.log`。
 
-1. 从[最新 release](../../releases/latest) 下载 `osu.Game.Rulesets.DivaFlight.dll`。
+1. 从[最新 release](../../releases/latest) 下载 `osu.Game.Rulesets.OsuDiva.dll`。
 2. 关闭 lazer，把 DLL 复制到 lazer 数据目录的 `rulesets` 文件夹：
    - Linux：`~/.local/share/osu/rulesets/`
    - Windows：`%AppData%\osu\rulesets\`
@@ -31,31 +31,28 @@
 
 osu! [官方规则](https://osu.ppy.sh/wiki/en/Rules)写明：使用任何第三方工具来获得任何形式的优势都是不允许的，并举例了瞄准辅助程序、改变时间速率、宏，以及物理操作与游戏内操作不一一对应的按键绑定或硬件。规则还说明，作弊可能导致账号被永久限制。
 
-本项目是视觉上的读谱辅助。它做什么、不做什么：
+本项目是视觉上的读谱辅助：
 
 - 只利用 lazer 已经提供的谱面和游戏时钟，在游玩区上方画飞行音符。
 - 不读写游戏内存，不注入或改动输入，不移动光标、不按键，不改变判定窗口、判定、计分、mod 和谱面。全部玩法代码就是 lazer 自带的、未经修改的 osu!standard ruleset。
 - 没有任何网络代码，不向任何地方发送数据。
 - 不包含、也不会加入瞄准辅助、自动游玩、时机校正或任何替你操作的功能。
 
-这类视觉提示在 osu! 规则里算不算「优势」，该由 ppy 和 osu! 管理员判断，不由我判断。我没有向他们询问过，也没有核实 lazer 如何处理自定义 ruleset 的成绩（是否上传、是否排名、比赛是否接受）。因此：
+这类视觉提示在 osu! 规则里算不算「优势」，该由 ppy 和 osu! 管理员判断。
 
-- 请用于练习和读谱训练。不要在比赛中使用，也不要在组织者禁止的场合使用；拿不准时先看规则并询问组织者。
+因此：
+
+- 请用于练习和读谱训练或找点乐子。
 - 使用方式由你自己负责。作者不保证使用本项目一定被允许，也不对你的账号受到的处罚负责。
 - 请不要用本项目或其中的代码开发作弊工具。
-
-## 注意
-
-- 在这个模式里打出的成绩存在它自己的短名 `osudiva` 下。我没有核实 lazer 是否上传或排名自定义 ruleset 的成绩。
-- 发布后不要单独改类名或短名，先读 `docs/DEVELOPMENT.zh-CN.md`：短名是 lazer 数据库里的主键。
 
 ## 编译
 
 需要 .NET 10 SDK，要对着你正在用的 lazer 的程序集编译：
 
 ```
-dotnet build osu.Game.Rulesets.DivaFlight/osu.Game.Rulesets.DivaFlight.csproj -c Release -p:LazerBin=/path/to/lazer/usr/bin
-dotnet test osu.Game.Rulesets.DivaFlight.UnitTests -p:LazerBin=/path/to/lazer/usr/bin
+dotnet build osu.Game.Rulesets.OsuDiva/osu.Game.Rulesets.OsuDiva.csproj -c Release -p:LazerBin=/path/to/lazer/usr/bin
+dotnet test osu.Game.Rulesets.OsuDiva.UnitTests -p:LazerBin=/path/to/lazer/usr/bin
 ```
 
 开发记录：[docs/DEVELOPMENT.zh-CN.md](docs/DEVELOPMENT.zh-CN.md)。
