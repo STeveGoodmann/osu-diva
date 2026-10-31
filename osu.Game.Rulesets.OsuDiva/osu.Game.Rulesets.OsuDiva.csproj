@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Project">
+    <TargetFramework>net10.0</TargetFramework>
+    <!--
+      The assembly name and the root namespace stay "DivaFlight" although the folders and files are called OsuDiva.
+      lazer stores "namespace.OsuDivaRuleset, assembly" in its database to find the ruleset again;
+      changing either would orphan that record and collide with the short name "osudiva". The DLL file name is the assembly name.
+    -->
+    <AssemblyName>osu.Game.Rulesets.DivaFlight</AssemblyName>
+    <AssemblyTitle>osu.Game.Rulesets.DivaFlight</AssemblyTitle>
+    <OutputType>Library</OutputType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RootNamespace>osu.Game.Rulesets.DivaFlight</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\**" />
+  </ItemGroup>
+
+  <!--
+    Default: compile against the NuGet packages.
+    The lazer *release* build can lag behind NuGet (2026.1026.0 on NuGet is a pre-release, the stable release is 2026.1005.0),
+    so a ruleset must be compiled against the assemblies of the lazer build it will run in.
+    To do that, point LazerBin at the folder holding that build's osu.Game.dll
+    (an extracted AppImage: run osu.AppImage with the extract option, then use squashfs-root/usr/bin):
+
+      dotnet build -c Release -p:LazerBin=/path/to/squashfs-root/usr/bin
+  -->
+  <ItemGroup Condition="'$(LazerBin)' == ''">
+    <PackageReference Include="ppy.osu.Game" Version="2026.1026.0" />
+    <!--
+      The osu! ruleset DLL ships inside lazer itself. Reference it for compiling only (ExcludeAssets=runtime),
+      so it is not copied next to this ruleset, where lazer would load it a second time as a separate ruleset.
+    -->
+    <PackageReference Include="ppy.osu.Game.Rulesets.Osu" Version="2026.1026.0" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(LazerBin)' != ''">
+    <Reference Include="osu.Game">
+      <HintPath>$(LazerBin)/osu.Game.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="osu.Game.Rulesets.Osu">
+      <HintPath>$(LazerBin)/osu.Game.Rulesets.Osu.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="osu.Framework">
+      <HintPath>$(LazerBin)/osu.Framework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Realm">
+      <HintPath>$(LazerBin)/Realm.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="osuTK">
+      <HintPath>$(LazerBin)/osuTK.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

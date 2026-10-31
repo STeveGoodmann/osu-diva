@@ -9,9 +9,9 @@ NuGet 上的 `ppy.osu.Game` 2026.1026.0 对应的是预发布版 `2026.1026.0-ta
 ## 做法
 
 - `OsuDivaRuleset` 不继承 `OsuRuleset`（继承会带上 osu! 的 legacy ID 0），而是内部持有一个 `OsuRuleset`，把谱面转换、计分、判定、mod、按键、难度、皮肤等全部交给它，所以玩法逻辑不是重写的。
-- `DrawableDivaFlightRuleset` 继承 `DrawableOsuRuleset`，只多加一个 `DivaFlightLayer`。
-- `DivaFlightLayer` 只读取谱面和游戏时钟，只画图，不碰判定和输入。
-- 飞行与变色算法移植自 `native_core.py`（`DivaFlightMath.cs`）。
+- `DrawableOsuDivaRuleset` 继承 `DrawableOsuRuleset`，只多加一个 `OsuDivaLayer`。
+- `OsuDivaLayer` 只读取谱面和游戏时钟，只画图，不碰判定和输入。
+- 飞行与变色算法移植自 `native_core.py`（`OsuDivaMath.cs`）。
 
 ## 名称与设置语言
 
@@ -45,7 +45,7 @@ NuGet 上的 `ppy.osu.Game` 2026.1026.0 对应的是预发布版 `2026.1026.0-ta
 - 编号：显示连击内序号（可开关）。
 - 拖尾：尾部朝向飞来的方向（可开关）。注意：Python 原型里拖尾画在了音符前进的那一侧，这里改成了在音符后面。
 - 飞行方向两种模式（`Flight direction` 设置）：`Vertical` 竖直；`Fan` 扇形，角度按音符相对**屏幕**中心的位置线性增大到最大角度。这是规划的起始方向，规划器可以再改（见下）。
-- **惩罚项规划器**（`DivaFlightPlanner`，设置里的 Optimise trajectories，默认开）：先按方向模式得到每个音符的起始飞入方向，再逐个音符试候选方向、选总代价最低的，最多 3 轮。飞入方向在规划里是**绝对角度**（0° 从上方飞入，90° 从右侧，180° 从下方，-90° 从左侧）。代价有：
+- **惩罚项规划器**（`OsuDivaPlanner`，设置里的 Optimise trajectories，默认开）：先按方向模式得到每个音符的起始飞入方向，再逐个音符试候选方向、选总代价最低的，最多 3 轮。飞入方向在规划里是**绝对角度**（0° 从上方飞入，90° 从右侧，180° 从下方，-90° 从左侧）。代价有：
   1. **画面内时间过短**：从进屏到命中不足「最短画面内时间」（默认 900 ms，设置里 200–1500 ms 可调）时，按缺少比例的平方乘以强度计罚，强度默认 32（设置里 0–64，0 为关闭）。
   2. **轨迹穿过物件**：飞行线进入另一个当时在画面上的物件（圆圈、滑条头、滑条路径上的采样点，不含转盘）的范围时，按在里面停留的时间计罚，停留满 150 ms 为 6。范围是两者半径之和的 75%；物件从出现（`TimePreempt`）到命中后 150 ms 算在画面上；音符自己的圆圈和滑条不算。
   3. **轨迹相交**：从进屏到目标的线段与另一个音符的线段真正交叉，每对罚 3。只统计两个音符在画面内的时间有重叠的情况；只在端点相碰（汇聚到同一处）不算。
@@ -143,7 +143,7 @@ lazer 设置里该 ruleset 的分节，在 osu! 自己的选项后面加了（�
 - 连击内角度范围和相邻允许角度差在优化后**略微上升**（68 → 123，13 → 167）：为了躲开物件，优化器接受了一点超限。这两项本身都很小。
 - 偏离起始方向（0.45/音符）和往外散开的奖励（−0.71/音符）加起来是一项可观的权衡，规模和穿过物件剩下的 2.76/音符相当。
 
-诊断方法在 `DivaFlightPlanner.EvaluatePerNote`（按音符拆开代价）和 `PlannerObstacle.IsSliderBody`（区分滑条身体上的障碍）。测量程序没有放进项目，放在沙箱里。
+诊断方法在 `OsuDivaPlanner.EvaluatePerNote`（按音符拆开代价）和 `PlannerObstacle.IsSliderBody`（区分滑条身体上的障碍）。测量程序没有放进项目，放在沙箱里。
 
 #### 「穿过物件」有多少是躲不掉的
 
@@ -173,19 +173,19 @@ lazer 设置里该 ruleset 的分节，在 osu! 自己的选项后面加了（�
 编译（需要 .NET SDK 10）：
 
 ```bash
-dotnet build osu.Game.Rulesets.DivaFlight/osu.Game.Rulesets.DivaFlight.csproj -c Release
+dotnet build osu.Game.Rulesets.OsuDiva/osu.Game.Rulesets.OsuDiva.csproj -c Release
 ```
 
 对着 2026.1005.0-lazer 编译（推荐，和你运行的正式版一致）：先解压 AppImage，再把 `LazerBin` 指向解压出的程序集目录：
 
 ```bash
 ./osu.AppImage --appimage-extract
-dotnet build osu.Game.Rulesets.DivaFlight/osu.Game.Rulesets.DivaFlight.csproj -c Release -p:LazerBin=$PWD/squashfs-root/usr/bin
+dotnet build osu.Game.Rulesets.OsuDiva/osu.Game.Rulesets.OsuDiva.csproj -c Release -p:LazerBin=$PWD/squashfs-root/usr/bin
 ```
 
 不设 `LazerBin` 时才用 NuGet 的 2026.1026.0 包（预发布版）。
 
-`dist/osu.Game.Rulesets.DivaFlight.dll` 是沙箱里对着 2026.1005.0-lazer 的 AppImage 编译好的版本，SHA-256 为 `fb40dc54f7635225ff286b5b44365d88ed6e5b74839292b152b5da557cf0b0ef`。
+`dist/osu.Game.Rulesets.DivaFlight.dll` 是沙箱里对着 2026.1005.0-lazer 的 AppImage 编译好的版本，SHA-256 为 `fb0bd748cd974750b1a1c4908639c9602a7ad525b5f2e5f1bff10fa0fc3fee9c`。
 
 安装：把这个 DLL 放进 lazer 数据目录下的 `rulesets` 文件夹，重启 lazer。Linux 上的位置我凭记忆写作 `~/.local/share/osu/rulesets/`，AppImage 是否相同**没有核实**，请以 lazer 设置里"打开 osu! 文件夹"为准。
 
@@ -194,12 +194,12 @@ dotnet build osu.Game.Rulesets.DivaFlight/osu.Game.Rulesets.DivaFlight.csproj -c
 ## 测试
 
 ```bash
-dotnet test osu.Game.Rulesets.DivaFlight.UnitTests
-dotnet test osu.Game.Rulesets.DivaFlight.Tests --filter "FullyQualifiedName~TestSceneOsuPlayer"
+dotnet test osu.Game.Rulesets.OsuDiva.UnitTests
+dotnet test osu.Game.Rulesets.OsuDiva.Tests --filter "FullyQualifiedName~TestSceneOsuPlayer"
 ```
 
 - 第二条在无图形环境下运行真实 gameplay。若 `apt` 没有 `libicu` 新版本，可设置 `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0` 并让 `LD_LIBRARY_PATH` 指向解压出的 `libicu70`，否则 lazer 的本地化加载会报错。这是沙箱环境的问题，不影响你的机器。
-- 想直接看画面：在 `osu.Game.Rulesets.DivaFlight.Tests` 目录下 `dotnet run`，这是官方模板的可视化测试，需要图形环境。我没有跑过，不保证开箱可用。
+- 想直接看画面：在 `osu.Game.Rulesets.OsuDiva.Tests` 目录下 `dotnet run`，这是官方模板的可视化测试，需要图形环境。我没有跑过，不保证开箱可用。
 
 ## 加载失败：「An issue with ruleset "DIVA Flight" occurred」
 
@@ -230,9 +230,9 @@ DependencyNotRegisteredException: The type ReplayAnalysisOverlay has a dependenc
   at DrawableOsuRuleset.load(ReplayPlayer replayPlayer)
 ```
 
-原因：lazer 按设置对象的**实际类型**登记依赖，而我登记的是 `DivaFlightRulesetConfigManager`（`OsuRulesetConfigManager` 的子类），复用的 osu! 玩法代码按 `OsuRulesetConfigManager` 去取，取不到，播放器加载就失败。这种缺失在普通游玩路径上不一定立刻抛错（有些类把它当可空），所以第一版的单元测试和 gameplay 测试都没发现。
+原因：lazer 按设置对象的**实际类型**登记依赖，而我登记的是 `OsuDivaRulesetConfigManager`（`OsuRulesetConfigManager` 的子类），复用的 osu! 玩法代码按 `OsuRulesetConfigManager` 去取，取不到，播放器加载就失败。这种缺失在普通游玩路径上不一定立刻抛错（有些类把它当可空），所以第一版的单元测试和 gameplay 测试都没发现。
 
-修复：`DrawableDivaFlightRuleset.CreateChildDependencies` 里把同一个实例再按 `OsuRulesetConfigManager` 登记一次。回归测试 `TestOsuGameplayCodeCanResolveItsConfig` 修复前复现了同样的报错，修复后通过；`TestSceneReplayPlayer` 覆盖自动播放那条路径。
+修复：`DrawableOsuDivaRuleset.CreateChildDependencies` 里把同一个实例再按 `OsuRulesetConfigManager` 登记一次。回归测试 `TestOsuGameplayCodeCanResolveItsConfig` 修复前复现了同样的报错，修复后通过；`TestSceneReplayPlayer` 覆盖自动播放那条路径。
 
 ## 规则与成绩
 
