@@ -1,10 +1,10 @@
 using osu.Framework.Localisation;
 using osu.Game.Configuration;
-using osu.Game.Rulesets.DivaFlight.Localisation;
+using osu.Game.Rulesets.OsuDiva.Localisation;
 using osu.Game.Rulesets.Configuration;
 using osu.Game.Rulesets.Osu.Configuration;
 
-namespace osu.Game.Rulesets.DivaFlight.Configuration
+namespace osu.Game.Rulesets.OsuDiva.Configuration
 {
     public enum OsuDivaSetting
     {

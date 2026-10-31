@@ -2,15 +2,15 @@
   <PropertyGroup Label="Project">
     <TargetFramework>net10.0</TargetFramework>
     <!--
-      The assembly name and the root namespace stay "DivaFlight" although the folders and files are called OsuDiva.
-      lazer stores "namespace.OsuDivaRuleset, assembly" in its database to find the ruleset again;
-      changing either would orphan that record and collide with the short name "osudiva". The DLL file name is the assembly name.
+      The assembly name is the DLL file name. lazer stores "namespace.OsuDivaRuleset, assembly" in its database and the short name
+      "osudiva" as the primary key. Renaming the assembly or namespace is tolerated only as long as the short name stays the same:
+      lazer then re-points the stored row to the new type (RealmRulesetStore, "existingSameShortName"). Delete the old DLL when renaming.
     -->
-    <AssemblyName>osu.Game.Rulesets.DivaFlight</AssemblyName>
-    <AssemblyTitle>osu.Game.Rulesets.DivaFlight</AssemblyTitle>
+    <AssemblyName>osu.Game.Rulesets.OsuDiva</AssemblyName>
+    <AssemblyTitle>osu.Game.Rulesets.OsuDiva</AssemblyTitle>
     <OutputType>Library</OutputType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <RootNamespace>osu.Game.Rulesets.DivaFlight</RootNamespace>
+    <RootNamespace>osu.Game.Rulesets.OsuDiva</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>

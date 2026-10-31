@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using osu.Framework.Localisation;
-using osu.Game.Rulesets.DivaFlight.Localisation;
+using osu.Game.Rulesets.OsuDiva.Localisation;
 using osuTK;
 
-namespace osu.Game.Rulesets.DivaFlight
+namespace osu.Game.Rulesets.OsuDiva
 {
     /// <summary>A playable note as the planner sees it.</summary>
     public sealed class PlannerNote

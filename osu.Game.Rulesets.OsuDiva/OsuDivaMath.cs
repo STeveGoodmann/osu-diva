@@ -1,10 +1,10 @@
 using System;
 using osu.Framework.Localisation;
-using osu.Game.Rulesets.DivaFlight.Localisation;
+using osu.Game.Rulesets.OsuDiva.Localisation;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Rulesets.DivaFlight
+namespace osu.Game.Rulesets.OsuDiva
 {
     public enum OsuDivaDirection
     {

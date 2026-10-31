@@ -6,7 +6,7 @@ using osu.Framework.Graphics.Rendering;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
 
-namespace osu.Game.Rulesets.DivaFlight
+namespace osu.Game.Rulesets.OsuDiva
 {
     public partial class OsuDivaRulesetIcon : Sprite
     {

@@ -6,9 +6,9 @@ using System.Reflection;
 using NUnit.Framework;
 using osu.Framework.Extensions;
 using osu.Framework.Localisation;
-using osu.Game.Rulesets.DivaFlight.Localisation;
+using osu.Game.Rulesets.OsuDiva.Localisation;
 
-namespace osu.Game.Rulesets.DivaFlight.UnitTests
+namespace osu.Game.Rulesets.OsuDiva.UnitTests
 {
     [TestFixture]
     public class LocalisationTests

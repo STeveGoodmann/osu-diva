@@ -15,7 +15,7 @@ NuGet 上的 `ppy.osu.Game` 2026.1026.0 对应的是预发布版 `2026.1026.0-ta
 
 ## 名称与设置语言
 
-- 模式在 lazer 里显示为「**osu! DIVA**」。内部短名是 `osudiva`，ruleset 类是 `OsuDivaRuleset`，DLL 文件名仍是 `osu.Game.Rulesets.DivaFlight.dll`。短名和类名**必须一起改**：短名是数据库里 ruleset 记录的主键，lazer 按类名找到旧记录后会尝试改写主键，Realm 不允许，会报 "An issue with ruleset"。类名也变了，旧记录（短名 `divaflight`、类 `DivaFlightRuleset`）解析不到类型，lazer 只会静默把它标成不可用，并为新类建一条新记录。代价：`divaflight` 名下的设置（35 条）、成绩和按键绑定变成孤儿，设置回到默认值（按你说的不重要）。以后不要再单独改短名。
+- 模式在 lazer 里显示为「**osu! DIVA**」。内部短名是 `osudiva`，ruleset 类是 `OsuDivaRuleset`，DLL 文件名为 `osu.Game.Rulesets.OsuDiva.dll`（命名空间和程序集名早先叫 DivaFlight，后来改名；短名没变，lazer 会把旧记录指向新类型，所以设置保留，但必须删掉旧的 DivaFlight DLL）。短名和类名**必须一起改**：短名是数据库里 ruleset 记录的主键，lazer 按类名找到旧记录后会尝试改写主键，Realm 不允许，会报 "An issue with ruleset"。类名也变了，旧记录（短名 `divaflight`、类 `DivaFlightRuleset`）解析不到类型，lazer 只会静默把它标成不可用，并为新类建一条新记录。代价：`divaflight` 名下的设置（35 条）、成绩和按键绑定变成孤儿，设置回到默认值（按你说的不重要）。以后不要再单独改短名。
 - 设置界面有中英文两套文字，**跟着 lazer 自己的语言设置走**：任何中文区域（zh、zh-CN、zh-TW 等）显示中文，其他语言显示英文。覆盖设置项的名称、说明，以及下拉框里的选项（飞行方向、搜索方式、材质）。文字都在 `Localisation/DivaStrings.cs`；下拉选项用 `[LocalisableDescription]` 取名。
 - 没有覆盖的：内部 mod 的名字（玩家选不到）、日志里的英文。
 
@@ -185,7 +185,7 @@ dotnet build osu.Game.Rulesets.OsuDiva/osu.Game.Rulesets.OsuDiva.csproj -c Relea
 
 不设 `LazerBin` 时才用 NuGet 的 2026.1026.0 包（预发布版）。
 
-`dist/osu.Game.Rulesets.DivaFlight.dll` 是沙箱里对着 2026.1005.0-lazer 的 AppImage 编译好的版本，SHA-256 为 `fb0bd748cd974750b1a1c4908639c9602a7ad525b5f2e5f1bff10fa0fc3fee9c`。
+`dist/osu.Game.Rulesets.OsuDiva.dll` 是沙箱里对着 2026.1005.0-lazer 的 AppImage 编译好的版本，SHA-256 为 `83585e635f8d3ca5201119cf4562f0754367c83b6661ea8f923b942eba9d9c48`。
 
 安装：把这个 DLL 放进 lazer 数据目录下的 `rulesets` 文件夹，重启 lazer。Linux 上的位置我凭记忆写作 `~/.local/share/osu/rulesets/`，AppImage 是否相同**没有核实**，请以 lazer 设置里"打开 osu! 文件夹"为准。
 

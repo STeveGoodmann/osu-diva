@@ -4,11 +4,11 @@ using System.Linq;
 using NUnit.Framework;
 using osu.Game.Beatmaps;
 using osu.Game.Beatmaps.ControlPoints;
-using osu.Game.Rulesets.DivaFlight.UI;
+using osu.Game.Rulesets.OsuDiva.UI;
 using osu.Game.Rulesets.Osu.Objects;
 using osuTK;
 
-namespace osu.Game.Rulesets.DivaFlight.UnitTests
+namespace osu.Game.Rulesets.OsuDiva.UnitTests
 {
     /// <summary>The penalties and rewards of the trajectory planner.</summary>
     [TestFixture]

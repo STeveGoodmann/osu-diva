@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <RootNamespace>osu.Game.Rulesets.DivaFlight.UnitTests</RootNamespace>
+    <RootNamespace>osu.Game.Rulesets.OsuDiva.UnitTests</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.0" />

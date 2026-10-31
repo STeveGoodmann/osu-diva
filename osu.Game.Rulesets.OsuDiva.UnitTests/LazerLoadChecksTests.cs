@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using osu.Game.Beatmaps;
 
-namespace osu.Game.Rulesets.DivaFlight.UnitTests
+namespace osu.Game.Rulesets.OsuDiva.UnitTests
 {
     /// <summary>
     /// Repeats the checks lazer's RealmRulesetStore runs when it loads a ruleset DLL.

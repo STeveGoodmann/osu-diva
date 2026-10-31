@@ -10,8 +10,8 @@ using osu.Game.Configuration;
 using osu.Game.Overlays.Settings;
 using osu.Game.Rulesets.Configuration;
 using osu.Game.Rulesets.Difficulty;
-using osu.Game.Rulesets.DivaFlight.Configuration;
-using osu.Game.Rulesets.DivaFlight.UI;
+using osu.Game.Rulesets.OsuDiva.Configuration;
+using osu.Game.Rulesets.OsuDiva.UI;
 using osu.Game.Rulesets.Edit;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Osu;
@@ -26,7 +26,7 @@ using osu.Game.Scoring;
 using osu.Game.Screens.Ranking.Statistics;
 using osu.Game.Skinning;
 
-namespace osu.Game.Rulesets.DivaFlight
+namespace osu.Game.Rulesets.OsuDiva
 {
     /// <summary>
     /// osu!standard gameplay, unchanged, plus Project DIVA style flying notes drawn on top as a reading aid.

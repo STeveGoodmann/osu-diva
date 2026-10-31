@@ -8,12 +8,12 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.Logging;
-using osu.Game.Rulesets.DivaFlight.Configuration;
+using osu.Game.Rulesets.OsuDiva.Configuration;
 using osu.Game.Rulesets.Objects.Types;
 using osu.Game.Rulesets.Osu.Objects;
 using osu.Game.Skinning;
 
-namespace osu.Game.Rulesets.DivaFlight.UI
+namespace osu.Game.Rulesets.OsuDiva.UI
 {
     /// <summary>
     /// Draws notes that fly in from outside the screen and land on every circle, slider head, slider repeat, slider tail

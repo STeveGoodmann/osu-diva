@@ -9,7 +9,7 @@ using osu.Game.Graphics.Sprites;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Rulesets.DivaFlight.UI
+namespace osu.Game.Rulesets.OsuDiva.UI
 {
     public sealed class NoteTextures
     {

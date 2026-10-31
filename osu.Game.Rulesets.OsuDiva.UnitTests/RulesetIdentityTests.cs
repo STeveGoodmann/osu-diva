@@ -2,7 +2,7 @@ using System.Linq;
 using NUnit.Framework;
 using osu.Game.Rulesets.Osu;
 
-namespace osu.Game.Rulesets.DivaFlight.UnitTests
+namespace osu.Game.Rulesets.OsuDiva.UnitTests
 {
     [TestFixture]
     public class RulesetIdentityTests
@@ -24,12 +24,12 @@ namespace osu.Game.Rulesets.DivaFlight.UnitTests
         [Test]
         public void StoredTypeIdentityDoesNotChange()
         {
-            // lazer's database row for this ruleset holds exactly this string (RulesetInfo.InstantiationInfo) and its short name as primary key.
-            // If this string changes, the stored row no longer resolves, a new row is made with the same short name, and lazer fails with
-            // "An issue with ruleset ... occurred". Folders and file names may change freely; the namespace and the assembly name may not.
+            // lazer's database row for this ruleset holds this string (RulesetInfo.InstantiationInfo) and the short name as primary key.
+            // The short name must never change. If the type string changes, lazer re-points the stored row only while the short name is
+            // unchanged (and the old DLL is removed from the rulesets folder), so a change here is deliberate: update this test with it.
             var info = new OsuDivaRuleset().RulesetInfo;
 
-            Assert.That(info.InstantiationInfo, Is.EqualTo("osu.Game.Rulesets.DivaFlight.OsuDivaRuleset, osu.Game.Rulesets.DivaFlight"));
+            Assert.That(info.InstantiationInfo, Is.EqualTo("osu.Game.Rulesets.OsuDiva.OsuDivaRuleset, osu.Game.Rulesets.OsuDiva"));
             Assert.That(info.ShortName, Is.EqualTo("osudiva"));
         }
 

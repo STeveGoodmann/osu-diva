@@ -3,13 +3,13 @@ using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Game.Beatmaps;
-using osu.Game.Rulesets.DivaFlight.Configuration;
-using osu.Game.Rulesets.DivaFlight.Mods;
+using osu.Game.Rulesets.OsuDiva.Configuration;
+using osu.Game.Rulesets.OsuDiva.Mods;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Osu.Configuration;
 using osu.Game.Rulesets.Osu.UI;
 
-namespace osu.Game.Rulesets.DivaFlight.UI
+namespace osu.Game.Rulesets.OsuDiva.UI
 {
     /// <summary>
     /// The unmodified osu! gameplay with the flight layer added above the playfield.

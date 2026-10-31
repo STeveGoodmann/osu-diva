@@ -6,7 +6,7 @@ using osu.Framework;
 using osu.Framework.Platform;
 using osu.Game.Tests;
 
-namespace osu.Game.Rulesets.DivaFlight.Tests
+namespace osu.Game.Rulesets.OsuDiva.Tests
 {
     public static class VisualTestRunner
     {

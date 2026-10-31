@@ -4,11 +4,11 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Game.Graphics.UserInterfaceV2;
 using osu.Game.Overlays.Settings;
-using osu.Game.Rulesets.DivaFlight.Configuration;
-using osu.Game.Rulesets.DivaFlight.Localisation;
+using osu.Game.Rulesets.OsuDiva.Configuration;
+using osu.Game.Rulesets.OsuDiva.Localisation;
 using osu.Game.Rulesets.Osu.UI;
 
-namespace osu.Game.Rulesets.DivaFlight.UI
+namespace osu.Game.Rulesets.OsuDiva.UI
 {
     /// <summary>
     /// The osu! ruleset options followed by the flight options.

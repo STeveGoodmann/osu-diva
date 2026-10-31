@@ -5,7 +5,7 @@ using osu.Game.Rulesets.Objects.Types;
 using osu.Game.Rulesets.Osu.Objects;
 using osuTK;
 
-namespace osu.Game.Rulesets.DivaFlight.UI
+namespace osu.Game.Rulesets.OsuDiva.UI
 {
     public enum FlightPartKind
     {

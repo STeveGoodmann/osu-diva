@@ -3,7 +3,7 @@ using NUnit.Framework;
 using osuTK;
 using osuTK.Graphics;
 
-namespace osu.Game.Rulesets.DivaFlight.UnitTests
+namespace osu.Game.Rulesets.OsuDiva.UnitTests
 {
     /// <summary>Ports of test_fan.py, test_combo_fan.py, test_distance_color.py and test_target_color.py (screen 1280x720 as in the Python tests).</summary>
     [TestFixture]

@@ -1,6 +1,6 @@
 using osu.Framework.Localisation;
 
-namespace osu.Game.Rulesets.DivaFlight.Localisation
+namespace osu.Game.Rulesets.OsuDiva.Localisation
 {
     /// <summary>
     /// The texts of the ruleset's settings in English and Simplified Chinese. The language follows lazer's own language setting:

@@ -5,7 +5,7 @@ using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Osu.Objects.Drawables;
 
-namespace osu.Game.Rulesets.DivaFlight.Mods
+namespace osu.Game.Rulesets.OsuDiva.Mods
 {
     /// <summary>
     /// Scales the opacity and the starting size of the approach circle (the ring that shrinks onto a circle before it has to be hit) of every circle and slider head.

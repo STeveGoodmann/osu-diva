@@ -1,10 +1,10 @@
 using System.Linq;
 using NUnit.Framework;
 using osu.Framework.Testing;
-using osu.Game.Rulesets.DivaFlight.UI;
+using osu.Game.Rulesets.OsuDiva.UI;
 using osu.Game.Tests.Visual;
 
-namespace osu.Game.Rulesets.DivaFlight.Tests
+namespace osu.Game.Rulesets.OsuDiva.Tests
 {
     /// <summary>
     /// Watching a replay (or playing with Autoplay) goes through ReplayPlayer, which makes DrawableOsuRuleset add its ReplayAnalysisOverlay.

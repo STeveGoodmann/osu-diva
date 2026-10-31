@@ -1,6 +1,6 @@
 using osuTK;
 
-namespace osu.Game.Rulesets.DivaFlight
+namespace osu.Game.Rulesets.OsuDiva
 {
     /// <summary>
     /// How notes fly: everything that decides a flight line besides the note itself.
